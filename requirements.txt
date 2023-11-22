@@ -4,6 +4,15 @@ Django==4.2.6
 Pillow==10.1.0
 Requests==2.31.0
 django-cors-headers==4.3.0
-psycopg2-binary==2.9.9
+
 psycopg2
 psycopg
+certifi==2023.5.7
+charset-normalizer==3.1.0
+
+idna==3.4
+psycopg2-binary==2.9.6
+requests==2.31.0
+sqlparse==0.4.3
+tzdata==2022.7
+urllib3==2.0.3
