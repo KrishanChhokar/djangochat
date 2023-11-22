@@ -1,0 +1,116 @@
+<!-- set_password.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Set Password</title>
+   <style>
+       body {
+           font-family: Arial, sans-serif;
+           text-align: center;
+           background-color: #f3f3f3;
+       }
+       .content {
+           max-width: 400px;
+           margin: 0 auto;
+           padding: 20px;
+           background-color: #fff;
+           border: 1px solid #ccc;
+           border-radius: 5px;
+           margin-top: 50px;
+       }
+       h1 {
+           color: #333;
+       }
+       .form-group {
+           text-align: left;
+           margin-bottom: 10px; /* Add margin to create spacing */
+       }
+       .form-group label {
+           display: block; /* Display labels on new lines for better spacing */
+       }
+       .form-group input {
+           width: 100%;
+           padding: 5px;
+           border: 1px solid #ccc;
+       }
+       button[type="submit"] {
+           background-color: #007BFF;
+           color: #fff;
+           padding: 10px 20px;
+           border: none;
+           border-radius: 5px;
+           cursor: pointer;
+       }
+       .error-message {
+        color: red;
+    }
+   </style>
+</head>
+<body>
+   <div class="content">
+       <h1>Set Password</h1>
+       <form id="password-reset-form" method="post" action="/forget_reset_done">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="new_password">New Password</label>
+            <input type="password" name="new_password" id="new_password" required>
+            <span id="password-error" class="error-message"></span>
+        </div>
+        <div class="form-group">
+            <label for="confirm_password">Confirm Password</label>
+            <input type="password" name="confirm_password" id="confirm_password" required>
+            <span id="confirm-password-error" class="error-message"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Reset Password</button>
+    </form>
+   </div>
+
+   <script>
+    document.getElementById('password-reset-form').addEventListener('submit', function (event) {
+        var newPassword = document.getElementById('new_password').value;
+        var confirmPass = document.getElementById('confirm_password').value;
+        var passwordError = document.getElementById('password-error');
+        var confirmPassError = document.getElementById('confirm-password-error');
+
+        // Password validation regular expressions
+        var uppercase = /[A-Z]/;
+        var number = /\d/;
+        var specialChar = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/;
+
+        // Clear previous error messages
+        passwordError.innerHTML = '';
+        confirmPassError.innerHTML = '';
+
+        if (newPassword.length < 8) {
+            passwordError.innerHTML = 'Password must be at least 8 characters long.';
+            passwordError.classList.add('error-message');
+            event.preventDefault();
+        }
+        if (!uppercase.test(newPassword)) {
+            passwordError.innerHTML = 'Password must contain at least one uppercase letter.';
+            passwordError.classList.add('error-message');
+            event.preventDefault();
+        }
+        if (!number.test(newPassword)) {
+            passwordError.innerHTML = 'Password must contain at least one number.';
+            passwordError.classList.add('error-message');
+            event.preventDefault();
+        }
+        if (!specialChar.test(newPassword)) {
+            passwordError.innerHTML = 'Password must contain at least one special character.';
+            passwordError.classList.add('error-message');
+            event.preventDefault();
+        }
+        if (newPassword !== confirmPass) {
+            confirmPassError.innerHTML = 'Passwords do not match.';
+            passwordError.classList.add('error-message');
+            event.preventDefault();
+        }
+    });
+</script>
+
+
+</body>
+</html>

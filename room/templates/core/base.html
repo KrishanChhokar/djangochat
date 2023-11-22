@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>One Page WonderChat | Chat</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/static/index.css" />
+
+    <style>
+      .messages {
+        height: 400px;
+        overflow-y: auto;
+      }
+
+      h1,
+      h2,
+      a {
+        font-family: Montserrat-Regular;
+      }
+      a {
+        font-family: Montserrat-Regular;
+        font-size: 20px;
+      }
+      span{
+        font-family: Montserrat-Regular;
+        text-transform: uppercase;
+        font-size: 1rem;
+        letter-spacing: 0.1rem;
+        font-weight: 700;
+      }
+      img{
+        margin-left: 80px;
+      }
+    </style>
+  </head>
+
+  <body class="bg-zinc-700">
+    <nav class="flex items-center justify-between px-4 py-6 bg-zinc-800">
+      <div class="flex flex-row justify-center items-center gap-3">
+        <img
+          class="img-fluid rounded-circle-logo"
+          src="/static/images/logo.jpeg"
+          alt="..." />
+        <span class="My text-white ">WonderChat</span>
+      </div>
+
+      <div class="flex items-center space-x-4 mx-5">
+        {% if request.user.is_authenticated %}
+        <a class="nav-link text-gray-200 hover:text-white" href="/home">HOME</a>
+
+        <a href="/rooms/" class="nav-link text-gray-200 hover:text-white"
+          >CHAT</a
+        >
+
+        <a
+          class="nav-link hover:white text-gray-200 hover:text-white"
+          href="/img"
+          >PROMPT</a
+        >
+
+        <a
+          class="nav-link hover:white text-gray-200 hover:text-white"
+          href="/contact"
+          >CONTACT US</a
+        >
+
+        <a
+          class="nav-link hover:white text-gray-200 hover:text-white"
+          href="{% url 'logout' %}"
+          >LOGOUT</a
+        >
+
+        {% else %}
+        <a href="/login/" class="text-white hover:text-gray-200">Log in</a>
+
+        <a
+          href="/signup/"
+          class="px-5 py-3 rounded-xl text-white bg-teal-600 hover:bg-teal-700"
+          >Sign up</a
+        >
+        {% endif %}
+      </div>
+    </nav>
+
+    {% block content %} {% endblock %} {% block scripts %} {% endblock %}
+  </body>
+</html>
