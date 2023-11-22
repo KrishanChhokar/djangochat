@@ -104,12 +104,8 @@ CHANNEL_LAYERS = {
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': '2FCa14C4G*2fBcf4Gb1aDg1CGCCAABBD',
-        'HOST': 'monorail.proxy.rlwy.net',
-        'PORT': '51977',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
